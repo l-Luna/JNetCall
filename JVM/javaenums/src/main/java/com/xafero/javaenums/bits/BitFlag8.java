@@ -7,7 +7,7 @@ import com.xafero.javaenums.units.ByteEnum;
 
 import java.util.Collection;
 
-public final class BitFlag8<T extends Enum & ByteFlag>
+public final class BitFlag8<T extends Enum<T> & ByteFlag>
         extends BitFlag<T>
         implements ByteEnum {
 

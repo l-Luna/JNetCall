@@ -7,7 +7,7 @@ import com.xafero.javaenums.units.ShortEnum;
 
 import java.util.Collection;
 
-public final class BitFlag16<T extends Enum & ShortFlag>
+public final class BitFlag16<T extends Enum<T> & ShortFlag>
         extends BitFlag<T>
         implements ShortEnum {
 

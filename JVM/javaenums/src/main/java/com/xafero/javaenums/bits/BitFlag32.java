@@ -7,7 +7,7 @@ import com.xafero.javaenums.units.IntEnum;
 
 import java.util.Collection;
 
-public final class BitFlag32<T extends Enum & IntFlag>
+public final class BitFlag32<T extends Enum<T> & IntFlag>
         extends BitFlag<T>
         implements IntEnum {
 

@@ -7,7 +7,7 @@ import com.xafero.javaenums.units.LongEnum;
 
 import java.util.Collection;
 
-public final class BitFlag64<T extends Enum & LongFlag>
+public final class BitFlag64<T extends Enum<T> & LongFlag>
         extends BitFlag<T>
         implements LongEnum {
 
