@@ -11,8 +11,8 @@ public final class ClassTools {
     private static final String AsyncAdd = "_A";
 
     public static Pair<String, String> toMethodId(MethodCall call) {
-        var name = call.M().replace("_", "");
-        var count = call.A().length;
+        var name = call.methodName().replace("_", "");
+        var count = call.args().length;
         var id = (name + "_" + count).toLowerCase();
         var ida = (id + AsyncAdd).toLowerCase();
         return Pair.with(ida, id);

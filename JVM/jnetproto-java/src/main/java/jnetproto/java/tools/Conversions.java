@@ -88,7 +88,7 @@ public final class Conversions {
                         for (var i = 0; i < props.size(); i++) {
                             var arg = args[i];
                             var prop = props.get(i);
-                            prop.Set().invoke(obj, arg);
+                            prop.set().invoke(obj, arg);
                         }
                         return obj;
                     }
@@ -149,7 +149,7 @@ public final class Conversions {
             var args = new Object[props.size()];
             for (var i = 0; i < args.length; i++) {
                 var prop = props.get(i);
-                var propGet = prop.Get();
+                var propGet = prop.get();
                 var propVal = propGet.invoke(obj);
                 args[i] = toObjectArray(propVal);
             }

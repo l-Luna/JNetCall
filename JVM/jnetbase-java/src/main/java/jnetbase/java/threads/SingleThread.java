@@ -16,7 +16,7 @@ public final class SingleThread<T extends AutoCloseable>
 
     public SingleThread(Supplier<T> creator) {
         _creator = creator;
-        _actions = new LinkedBlockingQueue<Consumer<T>>();
+        _actions = new LinkedBlockingQueue<>();
         _running = true;
         _thread = new Thread(this::doLoop);
         _thread.setDaemon(true);

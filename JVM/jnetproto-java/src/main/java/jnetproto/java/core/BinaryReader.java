@@ -63,7 +63,7 @@ public class BinaryReader implements IDataReader {
 
     @Override
     public float readF32() throws IOException {
-        return BitConverter.toSingle(readBytes(4));
+        return BitConverter.toFloat(readBytes(4));
     }
 
     @Override
@@ -181,12 +181,12 @@ public class BinaryReader implements IDataReader {
 
     @Override
     public Set<?> readSet() throws IOException {
-        return (Set<?>) readIterable(new TreeSet<Object>());
+        return (Set<?>) readIterable(new TreeSet<>());
     }
 
     @Override
     public List<?> readList() throws IOException {
-        return (List<?>) readIterable(new ArrayList<Object>());
+        return (List<?>) readIterable(new ArrayList<>());
     }
 
     private Iterable<?> readIterable(Iterable<?> coll) throws IOException {

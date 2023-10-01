@@ -124,7 +124,7 @@ public final class BinaryTest {
                         {"1006010104020000000503000000000000000600008040070000000000001440093600", new Object[]{'T', true, 2, 3L, 4f, 5d, '6'}},
                         {"10070101040200000005030000000000000006000080400700000000000014400936000A010037", new Object[]{'T', true, 2, 3L, 4f, 5d, '6', "7"}},
                         {"10080101040200000005030000000000000006000080400700000000000014400936000A0100370100", new Object[]{'T', true, 2, 3L, 4f, 5d, '6', "7", false}},
-                        // Set
+                        // set
                         {"1103010000000200", new Object[]{'S', (short) 2}},
                         {"11030200000002000300", new Object[]{'S', (short) 2, (short) 3}},
                         {"11030200000002000300", new Object[]{'S', (short) 2, (short) 3, (short) 3}},
@@ -160,7 +160,7 @@ public final class BinaryTest {
         var txt = value == null ? "" : value.toString();
         if (value instanceof Object[] objects) {
             if (objects[0] instanceof Character c && c == 'M') {
-                var dict = new HashMap<Object, Object>();
+                var dict = new HashMap<>();
                 for (var i = 1; i < objects.length; i += 2) {
                     var key = objects[i];
                     var val = objects[i + 1];
@@ -182,7 +182,7 @@ public final class BinaryTest {
             }
             else if (objects[0] instanceof Character c && c == 'L')
             {
-                var list = new LinkedList<Object>();
+                var list = new LinkedList<>();
                 for (var i = 1; i < objects.length; i++)
                 {
                     var val = objects[i];
@@ -192,7 +192,7 @@ public final class BinaryTest {
             }
             else if (objects[0] instanceof Character c && c == 'S')
             {
-                var set = new TreeSet<Object>();
+                var set = new TreeSet<>();
                 for (var i = 1; i < objects.length; i++)
                 {
                     var val = objects[i];

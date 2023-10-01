@@ -25,46 +25,33 @@ public final class Reflect {
             return false;
         if (del.getClass().getName().contains("Lambda"))
             return true;
-        if (del instanceof Class<?> c && c.isInterface() && c.getMethods().length == 1)
-            return true;
-        return false;
+	    return del instanceof Class<?> c && c.isInterface() && c.getMethods().length == 1;
     }
 
     public static Type getTaskType(Type taskType, Type defaultArg) {
         var taskArg = taskType instanceof ParameterizedType pt
                 ? Arrays.stream(pt.getActualTypeArguments()).findFirst().orElse(null)
                 : null;
-        if (taskArg == null) {
-            return defaultArg == null ? Object.class : defaultArg;
-        }
-        return taskArg;
+        return taskArg == null ? defaultArg == null ? Object.class : defaultArg : taskArg;
     }
 
     public static Method getMethod(BiFunction<Object, Object[], Object> func) {
-        var type = func.getClass();
-        var fields = type.getDeclaredFields();
-        var field = fields[0];
-        var raw = getField(field, func);
-        var method = (Method) raw;
-        return method;
+        return (Method)getField(func.getClass().getDeclaredFields()[0], func);
     }
 
     public static Object getField(Field field, Object obj) {
         try {
             field.setAccessible(true);
-            return field.get(obj);
+            Object o = field.get(obj);
+            field.setAccessible(false);
+            return o;
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
     }
 
     public static Method getTheMethod(Object delegate) {
-        var type = delegate.getClass();
-        var interfaces = type.getInterfaces();
-        var interf = interfaces[0];
-        var methods = interf.getMethods();
-        var method = methods[0];
-        return method;
+        return delegate.getClass().getInterfaces()[0].getMethods()[0];
     }
 
     public static InvocationHandler getProxyHandler(Object obj) {
@@ -80,9 +67,7 @@ public final class Reflect {
     }
 
     public static int getRank(Class<?> type) {
-        if (!type.isArray())
-            return 0;
-        return Strings.countMatches(type.getName(), '[');
+        return type.isArray() ? Strings.countMatches(type.getName(), '[') : 0;
     }
 
     public static Object invoke(Method method, Object obj, Object[] args) {
@@ -142,19 +127,19 @@ public final class Reflect {
         return props;
     }
 
-    public static Class extractRawClass(Type type)
+    public static Class<?> extractRawClass(Type type)
     {
         if (type instanceof ParameterizedType pt)
             if (pt.getRawType() instanceof Class<?> pc)
                 return pc;
-        return (Class) type;
+        return (Class<?>) type;
     }
 
-    public static <T> Constructor<T> getConstructor(Type type, Class[] types) {
-        return getConstructor(extractRawClass(type), types);
+    public static <T> Constructor<T> getConstructor(Type type, Class<?>[] types) {
+        return (Constructor<T>)getConstructor(extractRawClass(type), types);
     }
 
-    public static <T> Constructor<T> getConstructor(Class<T> clazz, Class[] types) {
+    public static <T> Constructor<T> getConstructor(Class<T> clazz, Class<?>[] types) {
         try {
             return clazz.getConstructor(types);
         } catch (NoSuchMethodException e) {
@@ -183,13 +168,12 @@ public final class Reflect {
         }
     }
 
-    public static <T> Constructor<T> getFirstConstructor(Type type)
-    {
-        return getFirstConstructor(extractRawClass(type));
+    public static <T> Constructor<T> getFirstConstructor(Type type){
+        return (Constructor<T>)getFirstConstructor(extractRawClass(type));
     }
 
     public static <T> Constructor<T> getFirstConstructor(Class<T> clazz) {
-        for (var item : clazz.getConstructors()  )
+        for (var item : clazz.getConstructors())
             return (Constructor<T>) item;
         return null;
     }
@@ -201,8 +185,7 @@ public final class Reflect {
     }
 
     private static void getAllInterfaces(Class<?> type, Set<Class<?>> found) {
-        while (type != null)
-        {
+        while (type != null){
             for (var interf : type.getInterfaces())
                 if (found.add(interf))
                     getAllInterfaces(interf, found);

@@ -32,10 +32,10 @@ public class TypeToken<T> {
     }
 
     public static <T> TypeToken<T> wrap(Type type) {
-        return new TypeToken<T>(type);
+        return new TypeToken<>(type);
     }
 
     public static <T> TypeToken<T> wrap(Class<T> clazz) {
-        return new TypeToken<T>(clazz);
+        return new TypeToken<>(clazz);
     }
 }

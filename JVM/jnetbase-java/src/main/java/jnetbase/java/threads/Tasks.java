@@ -38,14 +38,14 @@ public final class Tasks {
     public static <T> List<T> whenAllInvoke(List<Callable<T>> tasks)
             throws InterruptedException {
         var future = invokeAll(tasks);
-        var unpack = future.stream().map(f -> Tasks.get(f));
+        var unpack = future.stream().map(Tasks::get);
         return unpack.collect(Collectors.toList());
     }
 
     public static <T> List<T> whenAll(Collection<CompletableFuture<T>> tasks) {
         var array = tasks.toArray(CompletableFuture[]::new);
         CompletableFuture.allOf(array).join();
-        return tasks.stream().map(t -> get(t)).toList();
+        return tasks.stream().map(Tasks::get).toList();
     }
 
     private static <T> T get(Future<T> task) {

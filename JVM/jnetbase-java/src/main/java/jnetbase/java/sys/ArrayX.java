@@ -8,8 +8,8 @@ import java.util.function.BiFunction;
 
 public final class ArrayX {
 
-    public static ArrayList<Object> asObjectList(Iterable items) {
-        var list = new ArrayList<Object>();
+    public static <T> ArrayList<T> asObjectList(Iterable<T> items) {
+        var list = new ArrayList<T>();
         for (var item : items)
             list.add(item);
         return list;
@@ -24,7 +24,7 @@ public final class ArrayX {
         return array;
     }
 
-    public static Object[] asObjectArray(Iterable items) {
+    public static Object[] asObjectArray(Iterable<?> items) {
         return asObjectList(items).toArray(Object[]::new);
     }
 
@@ -42,7 +42,7 @@ public final class ArrayX {
 
     public static List<?> asTypedArrayList(Object[] args, Type type, BiFunction<Object, Type, Object> convert) {
         convert = convert == null ? ArrayX::noConvert : convert;
-        var list = new ArrayList<Object>();
+        var list = new ArrayList<>();
         for (var arg : args)
             list.add(convert.apply(arg, type));
         return list;

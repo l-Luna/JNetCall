@@ -1,7 +1,7 @@
 package jnetcall.java.impl.io.disk;
 
 import jnetbase.java.files.FileSystemWatcher;
-import jnetbase.java.threads.IExecutor;
+import jnetbase.java.threads.Executor;
 import jnetcall.java.api.enc.IEncoding;
 import jnetcall.java.api.io.IPushTransport;
 import jnetcall.java.api.io.ISendTransport;
@@ -22,10 +22,10 @@ public final class FolderTransport implements ISendTransport, IPushTransport, Au
     private final Path _inputFolder;
     private final FileSystemWatcher _inputWatch;
     private final Path _outputFolder;
-    private final IExecutor _executor;
+    private final Executor _executor;
     private final int _wait;
 
-    public FolderTransport(IEncoding<byte[]> encoding, Path input, Path output, IExecutor executor) {
+    public FolderTransport(IEncoding<byte[]> encoding, Path input, Path output, Executor executor) {
         _executor = executor;
         _encoding = encoding;
         try {

@@ -15,7 +15,7 @@ public final class MemPipeStream implements Flushable, Closeable {
         _array = new byte[0];
         _input = new Input(_array);
         _output = new Output();
-        _queue = new LinkedBlockingQueue<Boolean>();
+        _queue = new LinkedBlockingQueue<>();
     }
 
     private int _readPos;

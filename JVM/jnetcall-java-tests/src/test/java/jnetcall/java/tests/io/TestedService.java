@@ -5,5 +5,5 @@ import org.example.impl.CalculatorService;
 public final class TestedService extends CalculatorService {
 
     @Override
-    public String getName() { return "C#"; }
+    public String getName() { return "className#"; }
 }

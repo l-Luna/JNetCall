@@ -3,12 +3,12 @@ package jnetbase.java.threads;
 import java.util.LinkedList;
 import java.util.List;
 
-public final class ThreadExecutor implements IExecutor {
+public final class ThreadExecutor implements Executor{
 
     private final List<Thread> _threads;
 
     public ThreadExecutor() {
-        _threads = new LinkedList<Thread>();
+        _threads = new LinkedList<>();
     }
 
     @Override

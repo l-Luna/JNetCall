@@ -9,11 +9,7 @@ public final class ManualResetEvent {
     private volatile CountDownLatch event;
 
     public ManualResetEvent(boolean state) {
-        if (state) {
-            event = new CountDownLatch(0);
-        } else {
-            event = new CountDownLatch(1);
-        }
+        event = new CountDownLatch(state ? 0 : 1);
     }
 
     public void set() {
@@ -22,9 +18,8 @@ public final class ManualResetEvent {
 
     public void reset() {
         synchronized (mutex) {
-            if (event.getCount() == 0) {
-                event = new CountDownLatch(1);
-            }
+            if (event.getCount() == 0)
+	            event = new CountDownLatch(1);
         }
     }
 

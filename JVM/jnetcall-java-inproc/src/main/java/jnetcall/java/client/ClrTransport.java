@@ -41,7 +41,7 @@ final class ClrTransport implements IPullTransport {
             _outputs = new LinkedBlockingQueue<>();
             if (_single != null)
                 return;
-            _single = new SingleThread<ClrContainer>(() -> new ClrContainer(dll));
+            _single = new SingleThread<>(() -> new ClrContainer(dll));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

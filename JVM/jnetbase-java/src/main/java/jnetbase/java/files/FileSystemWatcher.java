@@ -1,6 +1,6 @@
 package jnetbase.java.files;
 
-import jnetbase.java.threads.IExecutor;
+import jnetbase.java.threads.Executor;
 
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -19,7 +19,7 @@ public final class FileSystemWatcher implements AutoCloseable {
     private final List<WatchEvent.Kind<?>> _kinds;
     private final ThreadFactory _executor;
 
-    public FileSystemWatcher(Path folder, ThreadFactory executor, WatchEvent.Kind... kinds) {
+    public FileSystemWatcher(Path folder, ThreadFactory executor, WatchEvent.Kind<?>... kinds) {
         var root = folder.toFile();
         if (!root.exists() || root.isFile())
             throw new UnsupportedOperationException(root.getAbsolutePath());
@@ -101,7 +101,7 @@ public final class FileSystemWatcher implements AutoCloseable {
         var args = _kinds.toArray(WatchEvent.Kind[]::new);
         _key = _folder.register(_watcher, args);
 
-        if (_executor instanceof IExecutor ee) {
+        if (_executor instanceof Executor ee) {
             _thread = ee.createThread(this::tryRun, "FileSystemWatcher");
         } else {
             _thread = _executor.newThread(this::tryRun);

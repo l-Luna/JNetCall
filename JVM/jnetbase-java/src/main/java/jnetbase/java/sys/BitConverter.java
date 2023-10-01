@@ -42,7 +42,7 @@ public final class BitConverter {
         return allocate(4).putFloat(value).array();
     }
 
-    public static float toSingle(byte[] bytes) {
+    public static float toFloat(byte[] bytes) {
         return wrap(bytes).getFloat();
     }
 

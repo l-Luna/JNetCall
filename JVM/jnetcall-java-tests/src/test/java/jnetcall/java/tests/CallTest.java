@@ -179,7 +179,7 @@ public abstract class CallTest {
     public void shouldCallCalculator() throws Exception {
         try (var client = create(ICalculator.class)) {
 
-            assertEquals("C#", client.getName());
+            assertEquals("className#", client.getName());
 
             var value1 = 100.00D;
             var value2 = 15.99D;
