@@ -13,7 +13,7 @@ import com.xafero.javaenums.flags.ShortFlag;
 import java.lang.reflect.Array;
 import java.util.*;
 
-public abstract class BitFlag<T extends Enum<?> & IFlag<?>> {
+public abstract class BitFlag<T extends Enum<T> & IFlag<?>> {
     protected final Class<T> _enumType;
     protected final Set<T> _items;
 
@@ -52,37 +52,21 @@ public abstract class BitFlag<T extends Enum<?> & IFlag<?>> {
 
     @SafeVarargs
     public static <I extends Enum<I> & LongFlag> BitFlag64<I> of64(Class<I> clazz, I... items) {
-        return items == null ? of64(clazz) : of64(clazz, Arrays.asList(items));
+        return new BitFlag64<>(clazz, items == null ? List.of() : Arrays.asList(items));
     }
 
     @SafeVarargs
     public static <I extends Enum<I> & IntFlag> BitFlag32<I> of32(Class<I> clazz, I... items) {
-        return items == null ? of32(clazz) : of32(clazz, Arrays.asList(items));
+        return new BitFlag32<>(clazz, items == null ? List.of() : Arrays.asList(items));
     }
 
     @SafeVarargs
     public static <I extends Enum<I> & ShortFlag> BitFlag16<I> of16(Class<I> clazz, I... items) {
-        return items == null ? of16(clazz) : of16(clazz, Arrays.asList(items));
+        return new BitFlag16<>(clazz, items == null ? List.of() : Arrays.asList(items));
     }
 
     @SafeVarargs
     public static <I extends Enum<I> & ByteFlag> BitFlag8<I> of8(Class<I> clazz, I... items) {
-        return items == null ? of8(clazz) : of8(clazz, Arrays.asList(items));
-    }
-
-    public static <I extends Enum<I> & LongFlag> BitFlag64<I> of64(Class<I> clazz, Collection<I> coll) {
-        return new BitFlag64<>(clazz, coll);
-    }
-
-    public static <I extends Enum<I> & IntFlag> BitFlag32<I> of32(Class<I> clazz, Collection<I> coll) {
-        return new BitFlag32<>(clazz, coll);
-    }
-
-    public static <I extends Enum<I> & ShortFlag> BitFlag16<I> of16(Class<I> clazz, Collection<I> coll) {
-        return new BitFlag16<>(clazz, coll);
-    }
-
-    public static <I extends Enum<I> & ByteFlag> BitFlag8<I> of8(Class<I> clazz, Collection<I> coll) {
-        return new BitFlag8<>(clazz, coll);
+        return new BitFlag8<>(clazz, items == null ? List.of() : Arrays.asList(items));
     }
 }

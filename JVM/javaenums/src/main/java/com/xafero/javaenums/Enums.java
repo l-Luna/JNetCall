@@ -70,7 +70,7 @@ public final class Enums {
         for (var item : clazz.getEnumConstants())
             if ((value & item.asNumber()) != 0)
                 list.add(item);
-        return BitFlag.of64(clazz, list);
+        return new BitFlag64<>(clazz, list);
     }
 
     public static <T extends Enum<T> & IntFlag> BitFlag32<T> fromInt(Class<T> clazz, int value) {
@@ -78,7 +78,7 @@ public final class Enums {
         for (var item : clazz.getEnumConstants())
             if ((value & item.asNumber()) != 0)
                 list.add(item);
-        return BitFlag.of32(clazz, list);
+        return new BitFlag32<>(clazz, list);
     }
 
     public static <T extends Enum<T> & ShortFlag> BitFlag16<T> fromShort(Class<T> clazz, short value) {
@@ -86,7 +86,7 @@ public final class Enums {
         for (var item : clazz.getEnumConstants())
             if ((value & item.asNumber()) != 0)
                 list.add(item);
-        return BitFlag.of16(clazz, list);
+        return new BitFlag16<>(clazz, list);
     }
 
     public static <T extends Enum<T> & ByteFlag> BitFlag8<T> fromByte(Class<T> clazz, byte value) {
@@ -94,7 +94,7 @@ public final class Enums {
         for (var item : clazz.getEnumConstants())
             if ((value & item.asNumber()) != 0)
                 list.add(item);
-        return BitFlag.of8(clazz, list);
+        return new BitFlag8<>(clazz, list);
     }
 
     public static <T extends Enum<T> & LongFlag> long toLong(Iterable<T> enums) {
